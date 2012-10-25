@@ -1,0 +1,385 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf8" />
+	<title>Pure CSS MouseGame</title>
+	<style>
+	.info {
+		width: 400px;
+		height: 50px;
+		background: #555;
+		border: 1px solid black;
+		border-bottom: 1px solid #999;
+		margin: 50px auto 0px auto;
+		font-family: Arial;
+		font-weight: bold;
+		color: #eee;
+		cursor: default;
+	}
+
+	.mousegame {
+		width: 400px;
+		height: 350px;
+		border: 1px solid black;
+		margin: 0px auto;
+		font-size: 0px;
+		position: relative;
+	}
+
+	.mousegame tile {
+		display: inline-block;
+		width: 50px;
+		height: 50px;
+		position: absolute;
+		z-index: 1;
+		cursor: crosshair;
+	}
+
+	.mousegame tile[l1] {top: 0px;}
+	.mousegame tile[l2] {top: 50px;}
+	.mousegame tile[l3] {top: 100px;}
+	.mousegame tile[l4] {top: 150px;}
+	.mousegame tile[l5] {top: 200px;}
+	.mousegame tile[l6] {top: 250px;}
+	.mousegame tile[l7] {top: 300px;}
+
+	.mousegame tile[w1] {left: 0px;}
+	.mousegame tile[w2] {left: 50px;}
+	.mousegame tile[w3] {left: 100px;}
+	.mousegame tile[w4] {left: 150px;}
+	.mousegame tile[w5] {left: 200px;}
+	.mousegame tile[w6] {left: 250px;}
+	.mousegame tile[w7] {left: 300px;}
+	.mousegame tile[w8] {left: 350px;}
+
+	.mousegame tile:hover {
+		background: red;
+		width: 100%;
+		height: 100%;
+		left: 0px;
+		top: 0px;
+		z-index: 0;
+	}
+
+	.mousegame tile[wall] {
+		background: #333;
+	}
+
+	.mousegame tile[wall]:hover ~ lose {
+		display: block;
+	}
+
+	.mousegame tile[cp] {
+		background: #eee;
+	}
+
+	.mousegame tile[cp]:hover {
+		background: #eef;
+	}
+
+	.mousegame tile[start] {
+		background: green;
+	}
+
+	.mousegame tile[start]:hover {
+		background: green;
+	}
+
+	.mousegame tile[meta] {
+		background: blue;
+	}
+
+	.mousegame tile[meta]:hover ~ win {
+		display: block !important;
+	}
+
+	.mousegame lose {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		width: 100%;
+		height: 100%;
+		background: pink;
+		display: none;
+		z-index: 100;
+		text-align: center;
+		font-size: 30px;
+		font-family: Arial; 
+	}
+
+	.mousegame lose div, .mousegame win > div {
+		padding: 100px;
+	}
+
+	.mousegame lose:hover {
+		display: block;
+	}
+
+	.mousegame win {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		width: 100%;
+		height: 100%;
+		background: yellow;
+		display: none;
+		z-index: 100;
+		text-align: center;
+		font-size: 30px;
+		font-family: Arial; 
+	}
+
+	.mousegame win:hover {
+		display: block;
+	}
+
+	.mousegame .map {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		width: 100%;
+		height: 100%;
+		display: none;
+	}
+
+	.mousegame next {
+		position: absolute;
+		bottom: 0px;
+		left: 0px;
+		width: 50px;
+		height: 50px;
+		background: green;
+	}
+
+	.mousegame next:hover {
+		left: 0px !important;
+		top: 0px !important;
+		width: 100%;
+		height: 100%;
+	}
+
+	.mousegame next:hover > .map {
+		display: block;
+	}
+	</style>
+</head>
+<body>
+	<div class="info">
+		<span style="float: right; margin: 15px; color: gold;">CSS MouseGame</span>
+		<span style="display: inline-block; width: 40px; height: 40px; vertical-align: middle; margin: 5px; background: green;"></span>Start
+		<span style="display: inline-block; width: 40px; height: 40px; vertical-align: middle; margin: 5px; background: blue;"></span>Finish
+	</div>
+	<div class="mousegame">
+		<!--Line 1-->
+		<tile l1 w1 wall></tile>
+		<tile l1 w2 wall></tile>
+		<tile l1 w3 wall></tile>
+		<tile l1 w4 wall></tile>
+		<tile l1 w5 wall></tile>
+		<tile l1 w6 wall></tile>
+		<tile l1 w7 wall></tile>
+		<tile l1 w8 wall></tile>
+		<!--Line 2-->
+		<tile l2 w1 start></tile>
+		<tile l2 w2 cp></tile>
+		<tile l2 w3 cp></tile>
+		<tile l2 w4 wall></tile>
+		<tile l2 w5 cp></tile>
+		<tile l2 w6 cp></tile>
+		<tile l2 w7 cp></tile>
+		<tile l2 w8 wall></tile>
+		<!--Line 3-->
+		<tile l3 w1 wall></tile>
+		<tile l3 w2 wall></tile>
+		<tile l3 w3 cp></tile>
+		<tile l3 w4 wall></tile>
+		<tile l3 w5 cp></tile>
+		<tile l3 w6 wall></tile>
+		<tile l3 w7 cp></tile>
+		<tile l3 w8 wall></tile>
+		<!--Line 4-->
+		<tile l4 w1 wall></tile>
+		<tile l4 w2 wall></tile>
+		<tile l4 w3 cp></tile>
+		<tile l4 w4 cp></tile>
+		<tile l4 w5 cp></tile>
+		<tile l4 w6 wall></tile>
+		<tile l4 w7 cp></tile>
+		<tile l4 w8 wall></tile>
+		<!--Line 5-->
+		<tile l5 w1 wall></tile>
+		<tile l5 w2 wall></tile>
+		<tile l5 w3 wall></tile>
+		<tile l5 w4 wall></tile>
+		<tile l5 w5 wall></tile>
+		<tile l5 w6 wall></tile>
+		<tile l5 w7 cp></tile>
+		<tile l5 w8 wall></tile>
+		<!--Line 6-->
+		<tile l6 w1 wall></tile>
+		<tile l6 w2 meta></tile>
+		<tile l6 w3 cp></tile>
+		<tile l6 w4 cp></tile>
+		<tile l6 w5 cp></tile>
+		<tile l6 w6 cp></tile>
+		<tile l6 w7 cp></tile>
+		<tile l6 w8 wall></tile>
+		<!--Line 7-->
+		<tile l7 w1 wall></tile>
+		<tile l7 w2 wall></tile>
+		<tile l7 w3 wall></tile>
+		<tile l7 w4 wall></tile>
+		<tile l7 w5 wall></tile>
+		<tile l7 w6 wall></tile>
+		<tile l7 w7 wall></tile>
+		<tile l7 w8 wall></tile>
+		<lose><div><strong>Lose!</strong><br/><br/><i>Try again...</i></div></lose>
+		<win>
+			<div><strong>Level 1 Completed!</strong><br/><br/><i>Ready for next?!</i></div>
+			<next style="position: absolute; left: 50px; top: 50px;">
+				<div class="map">
+					<!--Line 1-->
+					<tile l1 w1 wall></tile>
+					<tile l1 w2 wall></tile>
+					<tile l1 w3 wall></tile>
+					<tile l1 w4 wall></tile>
+					<tile l1 w5 wall></tile>
+					<tile l1 w6 wall></tile>
+					<tile l1 w7 wall></tile>
+					<tile l1 w8 wall></tile>
+					<!--Line 2-->
+					<tile l2 w1 wall></tile>
+					<tile l2 w2 start></tile>
+					<tile l2 w3 wall></tile>
+					<tile l2 w4 cp></tile>
+					<tile l2 w5 cp></tile>
+					<tile l2 w6 cp></tile>
+					<tile l2 w7 cp></tile>
+					<tile l2 w8 wall></tile>
+					<!--Line 3-->
+					<tile l3 w1 wall></tile>
+					<tile l3 w2 cp></tile>
+					<tile l3 w3 wall></tile>
+					<tile l3 w4 cp></tile>
+					<tile l3 w5 wall></tile>
+					<tile l3 w6 wall></tile>
+					<tile l3 w7 cp></tile>
+					<tile l3 w8 wall></tile>
+					<!--Line 4-->
+					<tile l4 w1 wall></tile>
+					<tile l4 w2 cp></tile>
+					<tile l4 w3 wall></tile>
+					<tile l4 w4 cp></tile>
+					<tile l4 w5 meta></tile>
+					<tile l4 w6 wall></tile>
+					<tile l4 w7 cp></tile>
+					<tile l4 w8 wall></tile>
+					<!--Line 5-->
+					<tile l5 w1 wall></tile>
+					<tile l5 w2 cp></tile>
+					<tile l5 w3 wall></tile>
+					<tile l5 w4 wall></tile>
+					<tile l5 w5 wall></tile>
+					<tile l5 w6 wall></tile>
+					<tile l5 w7 cp></tile>
+					<tile l5 w8 wall></tile>
+					<!--Line 6-->
+					<tile l6 w1 wall></tile>
+					<tile l6 w2 cp></tile>
+					<tile l6 w3 cp></tile>
+					<tile l6 w4 cp></tile>
+					<tile l6 w5 cp></tile>
+					<tile l6 w6 cp></tile>
+					<tile l6 w7 cp></tile>
+					<tile l6 w8 wall></tile>
+					<!--Line 7-->
+					<tile l7 w1 wall></tile>
+					<tile l7 w2 wall></tile>
+					<tile l7 w3 wall></tile>
+					<tile l7 w4 wall></tile>
+					<tile l7 w5 wall></tile>
+					<tile l7 w6 wall></tile>
+					<tile l7 w7 wall></tile>
+					<tile l7 w8 wall></tile>
+					<lose><div><strong>Lose!</strong><br/><br/><i>Try again...</i></div></lose>
+					<win>
+						<div><strong>Level 2 Completed!</strong><br/><br/><i>Ready for next?!</i></div>
+						<next style="position: absolute; left: 0px; top: 150px;">
+							<div class="map">
+								<!--Line 1-->
+								<tile l1 w1 wall></tile>
+								<tile l1 w2 wall></tile>
+								<tile l1 w3 wall></tile>
+								<tile l1 w4 wall></tile>
+								<tile l1 w5 wall></tile>
+								<tile l1 w6 wall></tile>
+								<tile l1 w7 wall></tile>
+								<tile l1 w8 wall></tile>
+								<!--Line 2-->
+								<tile l2 w1 wall></tile>
+								<tile l2 w2 wall></tile>
+								<tile l2 w3 wall></tile>
+								<tile l2 w4 wall></tile>
+								<tile l2 w5 wall></tile>
+								<tile l2 w6 wall></tile>
+								<tile l2 w7 wall></tile>
+								<tile l2 w8 wall></tile>
+								<!--Line 3-->
+								<tile l3 w1 wall></tile>
+								<tile l3 w2 wall></tile>
+								<tile l3 w3 wall></tile>
+								<tile l3 w4 wall></tile>
+								<tile l3 w5 wall></tile>
+								<tile l3 w6 wall></tile>
+								<tile l3 w7 wall></tile>
+								<tile l3 w8 wall></tile>
+								<!--Line 4-->
+								<tile l4 w1 start></tile>
+								<tile l4 w2 cp></tile>
+								<tile l4 w3 cp></tile>
+								<tile l4 w4 cp></tile>
+								<tile l4 w5 cp></tile>
+								<tile l4 w6 cp></tile>
+								<tile l4 w7 cp></tile>
+								<tile l4 w8 meta></tile>
+								<!--Line 5-->
+								<tile l5 w1 wall></tile>
+								<tile l5 w2 wall></tile>
+								<tile l5 w3 wall></tile>
+								<tile l5 w4 wall></tile>
+								<tile l5 w5 wall></tile>
+								<tile l5 w6 wall></tile>
+								<tile l5 w7 wall></tile>
+								<tile l5 w8 wall></tile>
+								<!--Line 6-->
+								<tile l6 w1 wall></tile>
+								<tile l6 w2 wall></tile>
+								<tile l6 w3 wall></tile>
+								<tile l6 w4 wall></tile>
+								<tile l6 w5 wall></tile>
+								<tile l6 w6 wall></tile>
+								<tile l6 w7 wall></tile>
+								<tile l6 w8 wall></tile>
+								<!--Line 7-->
+								<tile l7 w1 wall></tile>
+								<tile l7 w2 wall></tile>
+								<tile l7 w3 wall></tile>
+								<tile l7 w4 wall></tile>
+								<tile l7 w5 wall></tile>
+								<tile l7 w6 wall></tile>
+								<tile l7 w7 wall></tile>
+								<tile l7 w8 wall></tile>
+								<lose><div><strong>Lose!</strong><br/><br/><i>Try again...</i></div></lose>
+								<win>
+								<div><strong>That was so HARD!</strong><br/><br/><i>Thanks for playing! :D</i></div>
+								</win>
+							</div>
+						</next>
+					</win>
+				</div>
+			</next>
+		</win>
+	</div>
+	<center><a href="http://tanner.gamedev.pl/projects/css-mousegame/" title="CSS MouseGame" target="_blank">Project HOME</a> | Powered by <a href="http://tanner.gamedev.pl/" title="Tanner" target="_blank">Tanner</a></center>
+</body>
+</html>
