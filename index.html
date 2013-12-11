@@ -1,16 +1,22 @@
+
 <!doctype html>
 <html>
 <head>
 	<meta charset="utf8" />
 	<title>Pure CSS MouseGame</title>
 	<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	
 	.info {
 		width: 400px;
 		height: 50px;
 		background: #555;
-		border: 1px solid black;
-		border-bottom: 1px solid #999;
-		margin: 50px auto 0px auto;
+		/*border: 1px solid black;
+		border-bottom: 1px solid #999;*/
+		margin: 0px auto;
 		font-family: Arial;
 		font-weight: bold;
 		color: #eee;
@@ -20,10 +26,11 @@
 	.mousegame {
 		width: 400px;
 		height: 350px;
-		border: 1px solid black;
+		/*border: 1px solid black;*/
 		margin: 0px auto;
 		font-size: 0px;
 		position: relative;
+		overflow: hidden;
 	}
 
 	.mousegame tile {
@@ -163,7 +170,7 @@
 	}
 	</style>
 </head>
-<body>
+<body style="padding-bottom: 0px; margin-bottom: 0px;">
 	<div class="info">
 		<span style="float: right; margin: 15px; color: gold;">CSS MouseGame</span>
 		<span style="display: inline-block; width: 40px; height: 40px; vertical-align: middle; margin: 5px; background: green;"></span>Start
@@ -380,6 +387,13 @@
 			</next>
 		</win>
 	</div>
-	<center><a href="http://tanner.gamedev.pl/projects/css-mousegame/" title="CSS MouseGame" target="_blank">Project HOME</a> | Powered by <a href="http://tanner.gamedev.pl/" title="Tanner" target="_blank">Tanner</a></center>
+	<a target="_blank" style="text-decoration: none;" href="http://www.youtube.com/watch?v=NKIGYH3tUXo">
+	<!-- Yeah! Inline-CSS :| -->
+	<div style="color: #f3f !important; font-family: Arial; margin: 0 auto; width: 400px; background: black; padding: 5px 0; text-align: center;">
+		Walkthrough ❤
+	</div></a>
+	<div style="margin: 5px auto; text-align: center;">
+	<a href="http://twitter.com/tannernetwork" title="Tanner" target="_blank">@tannernetwork</a>
+	</div>
 </body>
 </html>
